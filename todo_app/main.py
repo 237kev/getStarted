@@ -17,7 +17,7 @@ while True:
         with open("files/todos.txt", 'w') as file:
             file.writelines(todos)
 
-    if 'show' in user_action:
+    elif 'show' in user_action:
 
         with open("Files/todos.txt",'r') as file:
             todos = file.readlines()
@@ -27,7 +27,7 @@ while True:
         for index, todo_item in enumerate(new_todos):
             print(f"{index+1}-{todo_item.capitalize()}")
 
-    if 'edit' in user_action:
+    elif 'edit' in user_action:
         with open("files/todos.txt", 'r') as file:
            todos = file.readlines()
         number = int((user_action[4: ]).strip())
@@ -43,7 +43,7 @@ while True:
            todos.sort(key=str.lower)
         print(new_todo)
 
-    if 'complete' in user_action:
+    elif 'complete' in user_action:
 
         with open("files/todos.txt", 'r') as file:
             todos = file.readlines()
@@ -58,10 +58,10 @@ while True:
             todos.sort(key=str.lower)
 
 
-    if 'exit' in user_action:
+    elif 'exit' in user_action:
         break
 
-    if "whatever" in user_action:
+    else: #"whatever" in user_action:
         print("you entered an unknown command")
 
 print("bye!")

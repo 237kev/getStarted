@@ -6,16 +6,15 @@ while True:
     match user_action:
         case 'add':
             todo = input("Enter a todo: ")
-
+            todos = []
             with open("Files/todos.txt", 'r') as file:
-                todos = file.readline()
+                todos = file.readlines()
 
-            todos.append(new_todo + '\n')      # the new todoo item is appended to list read from the file todos
+            todos.append(todo + '\n')      # the new todoo item is appended to list read from the file todos
             todos.sort(key=str.lower)
 
-            file = open("files/todos.txt", "w")  # a new file is created in write mode and the old one does not exist anymore becuase it is now overwritten
-            file.writelines(todos)         #the new list ist now written in the new created todos file with the new appended todoo item
-            file.close()
+            with open("files/todos.txt", 'w') as file:
+                file.writelines(todos)
 
         case 'show'|'display':#
 
@@ -28,12 +27,25 @@ while True:
                 print(f"{index+1}-{todo_item.capitalize()}")
 
         case 'edit':
+            with open("files/todos.txt", 'r') as file:
+               todos = file.readlines()
             number = int(input(" number if the todo to edit: "))
             print(number)
+
             todo_to_be_edited = todos[number -1]
             print(todo_to_be_edited)
+
             new_todo = input("Enter a new todo: ")
-            todos[number - 1] = new_todo
+            todos[number - 1] = new_todo + '\n'
+
+            with open("files/todos.txt", 'w') as file:
+               file.writelines(todos)
+               todos.sort(key=str.lower)
+
+
+
+
+
             print(new_todo)
 
         case 'complete':

@@ -2,10 +2,10 @@
 
 while True:
 #    user_action = (input("Type add, edit, show, complete or exit: ")).strip()
-    user_action = (input("which action do you want to perform? ")).strip()
+    user_action = (input("which action do you want to perform? "))
 
 
-    if  user_action.startswith('add'):
+    if 'add' in user_action:
         todos = []
         todo = (user_action[3:]).strip()
         with open("Files/todos.txt", 'r') as file:
@@ -17,7 +17,7 @@ while True:
         with open("files/todos.txt", 'w') as file:
             file.writelines(todos)
 
-    elif user_action.startswith('show'):
+    elif 'show' in user_action:
 
         with open("Files/todos.txt",'r') as file:
             todos = file.readlines()
@@ -27,50 +27,38 @@ while True:
         for index, todo_item in enumerate(new_todos):
             print(f"{index+1}-{todo_item.capitalize()}")
 
+    elif 'edit' in user_action:
+        with open("files/todos.txt", 'r') as file:
+           todos = file.readlines()
+        number = int((user_action[4: ]).strip())
+        print(f"task {number} must be edited")
+        todo_to_be_edited = todos[number -1]
+        print(todo_to_be_edited)
 
-    elif user_action.startswith('edit'):
-        try:
-            with open("files/todos.txt", 'r') as file:
-               todos = file.readlines()
-            number = int((user_action[4: ]).strip())
-            print(f"task {number} must be edited")
-            todo_to_be_edited = todos[number -1]
-            print(todo_to_be_edited)
+        new_todo = input("Enter a new todo: ")
+        todos[number - 1] = new_todo + '\n'
 
-            new_todo = input("Enter a new todo: ")
-            todos[number - 1] = new_todo + '\n'
+        with open("files/todos.txt", 'w') as file:
+           file.writelines(todos)
+           todos.sort(key=str.lower)
+        print(new_todo)
 
-            with open("files/todos.txt", 'w') as file:
-               file.writelines(todos)
-               todos.sort(key=str.lower)
-            print(new_todo)
+    elif 'complete' in user_action:
 
-        except ValueError:
-            print("your command ist not valid")
-            continue
+        with open("files/todos.txt", 'r') as file:
+            todos = file.readlines()
+        number = int( (user_action[8: ]).strip() )
+        print("the " + str(number) + ". marked as completed")
+        todo_to_be_edited = todos[number - 1]
+        print(todo_to_be_edited + " has been completed \n und will be removed")
+        todos.pop(number - 1)
 
-    elif user_action.startswith('complete'):
-
-        try:
-            with open("files/todos.txt", 'r') as file:
-                todos = file.readlines()
-            number = int( (user_action[8: ]).strip() )
-            print("the " + str(number) + ". marked as completed")
-            todo_to_be_edited = todos[number - 1]
-            print(todo_to_be_edited + " has been completed \n und will be removed")
-            todos.pop(number - 1)
-
-            with open("files/todos.txt", 'w') as file:
-                file.writelines(todos)
-                todos.sort(key=str.lower)
-        except ValueError:
-            print("syntax error: task number expected after user action word 'complete' ")
-        except IndexError:
-            print("syntax error: task index is out if range ")
-            continue
+        with open("files/todos.txt", 'w') as file:
+            file.writelines(todos)
+            todos.sort(key=str.lower)
 
 
-    elif user_action.startswith('exit'):
+    elif 'exit' in user_action:
         break
 
     else: #"whatever" in user_action:

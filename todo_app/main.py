@@ -7,11 +7,8 @@ while True:
         case 'add':
             todo = input("Enter a todo: ")
 
-            file = open("Files/todos.txt", "r")  # the file name todoo opened in write mode
-            todos = file.readlines()       # the inhalt ist ausgelesen und ist stored in the list named todos
-            file.close()
-
-
+            with open("Files/todos.txt", 'r') as file:
+                todos = file.readline()
 
             todos.append(new_todo + '\n')      # the new todoo item is appended to list read from the file todos
             todos.sort(key=str.lower)
@@ -21,15 +18,10 @@ while True:
             file.close()
 
         case 'show'|'display':#
-            file = open("files/todos.txt", 'r')
-            todos = file.readlines()
-            file.close()
 
+            with open("Files/todos.txt",'r') as file:
+                todos = file.readlines()
             new_todos = []
- #           for todo_item in todos:
- #               new_todo = todo_item.strip('\n')  # to remove the back slash by each item of the list
- #               new_todos.append(new_todo)
-
             new_todos = [todo_item.strip('\n') for todo_item in todos] # list comprehension to contract the for lop in one line
 
             for  index, todo_item in enumerate(new_todos):

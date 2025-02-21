@@ -30,9 +30,8 @@ while True:
     if 'edit' in user_action:
         with open("files/todos.txt", 'r') as file:
            todos = file.readlines()
-        number = int(input(" number if the todo to edit: "))
-        print(number)
-
+        number = int((user_action[4: ]).strip())
+        print(f"task {number} must be edited")
         todo_to_be_edited = todos[number -1]
         print(todo_to_be_edited)
 
@@ -48,20 +47,15 @@ while True:
 
         with open("files/todos.txt", 'r') as file:
             todos = file.readlines()
-        number = int(input(" number of the completed task: "))
+        number = int( (user_action[8: ]).strip() )
         print("the " + str(number) + ". marked as completed")
-
         todo_to_be_edited = todos[number - 1]
         print(todo_to_be_edited + " has been completed \n und will be removed")
-
         todos.pop(number - 1)
 
         with open("files/todos.txt", 'w') as file:
             file.writelines(todos)
             todos.sort(key=str.lower)
-
-
-
 
 
     if 'exit' in user_action:

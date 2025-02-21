@@ -1,2 +1,22 @@
-un (1)
-deux (2)
+ablo
+Change bed linens: Replace sheets and pillowcases regularly.
+Clean kitchen appliances: Wipe down the exterior and interior of the microwave, oven, and refrigerator.
+Clean mirrors: Use glass cleaner to remove smudges and streaks.
+Clean out the refrigerator: Discard expired items and wipe down shelves.
+Clean the bathroom: Scrub the toilet, sink, shower, and bathtub.
+Clean the floor: Sweep, vacuum, or mop as needed.
+Clean windows: Wash interior and exterior glass surfaces.
+Cook a meal: Prepare breakfast, lunch, or dinner.
+dd bbbbb
+Declutter living areas: Organize and tidy up common spaces.
+Dust surfaces: Remove dust from furniture, shelves, and electronics.
+Laundry: Wash, dry, fold, and put away clothes.
+Organize closets: Sort through clothing and accessories, donating items no longer needed.
+Organize pantry: Sort and arrange food items, discarding expired products.
+Sweep the porch or entryway: Keep outdoor entrances clean and inviting.
+Take out the trash: Dispose of household garbage and replace liners.
+Vacuum upholstery: Remove dust and debris from furniture fabrics.
+Wash dishes: Clean utensils, plates, and cookware after meals.
+Water houseplants: Ensure indoor plants receive adequate hydration.
+Wipe down kitchen counters: Clean and sanitize surfaces after food preparation.
+Wipe down light switches and door handles: Sanitize high-touch areas to reduce germs.

@@ -25,25 +25,17 @@ def set_todos(path: str, todos: []):
 
 while True:
     try:
-
         user_action = (input("which action do you want to perform? ")).strip()
-
-
         if user_action.startswith('add'):
             try:
                 todos = []
                 todo = (user_action[3:]).strip()
-#                try:
-#                    with open("Files/todos.txt", 'r') as file:
-#                        todos = file.readlines()
-#               except FileNotFoundError:
-#                    todos = []  # Initialize an empty list if the file doesn't exist
+
                 todos = get_todos(TODO_FILES_PAHT)
                 todos.append(todo.capitalize() + '\n')      # the new todoo item is appended to list read from the file todos
                 todos.sort(key=str.lower)
 
-                with open("files/todos.txt", 'w') as file:
-                    file.writelines(todos)
+                set_todos(TODO_FILES_PAHT, todos)
             except AttributeError:
                 print("Error: 'user_action' should be a string.")
             except ValueError as ve:
@@ -61,8 +53,6 @@ while True:
             set_todos(TODO_FILES_PAHT, todos)
 
         elif user_action.startswith('show'):
-#            with open("Files/todos.txt",'r') as file:
-#                todos = file.readlines()
             todos = get_todos(TODO_FILES_PAHT)
             new_todos = []
             new_todos = [todo_item.strip('\n') for todo_item in todos] # list comprehension to contract the for lop in one line
@@ -71,8 +61,6 @@ while True:
                 print(f"{index+1}-{todo_item.capitalize()}")
 
         elif user_action.startswith('edit'):
-
-
             todos = get_todos(TODO_FILES_PAHT)
             try:
                 number = int((user_action[4: ]).strip())
@@ -90,24 +78,12 @@ while True:
 
             new_todo = input("Enter a new todo: ")
             todos[number - 1] = new_todo + '\n'
-#            try:
-#                with open("files/todos.txt", 'w') as file:
-#                   file.writelines(todos)
-#                   todos.sort(key=str.lower)
-#                print(new_todo)
-#            except PermissionError:
-#                print("Error: Insufficient permissions to write to the file.")
-#            except IsADirectoryError:
-#                print("Error: 'files/todos.txt' is a directory, not a file.")
-#            except IOError as io_err:
-#                print(f"IO error occurred: {io_err}")
+
             set_todos(TODO_FILES_PAHT,todos)
 
 
         elif user_action.startswith('complete'):
 
-#            with open("files/todos.txt", 'r') as file:
-#                todos = file.readlines()
             todos = get_todos(TODO_FILES_PAHT)
             try:
                 number = int(user_action[8:].strip())
@@ -124,9 +100,7 @@ while True:
                 todos.pop(number - 1)
 
             try:
-                with open("files/todos.txt", 'w') as file:
-                    file.writelines(todos)
-                    todos.sort(key=str.lower)
+                set_todos(TODO_FILES_PAHT,todos)
             except PermissionError:
                 print("Error: Insufficient permissions to write to the file.")
             except IsADirectoryError:

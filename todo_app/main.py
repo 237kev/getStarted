@@ -1,11 +1,11 @@
 
 
 while True:
-#    user_action = (input("Type add, edit, show, complete or exit: ")).strip()
-    user_action = (input("which action do you want to perform? "))
+
+    user_action = (input("which action do you want to perform? ")).strip()
 
 
-    if 'add' in user_action:
+    if user_action.startswith('add'):
         todos = []
         todo = (user_action[3:]).strip()
         with open("Files/todos.txt", 'r') as file:
@@ -17,8 +17,7 @@ while True:
         with open("files/todos.txt", 'w') as file:
             file.writelines(todos)
 
-    elif 'show' in user_action:
-
+    elif user_action.startswith('show'):
         with open("Files/todos.txt",'r') as file:
             todos = file.readlines()
         new_todos = []
@@ -27,7 +26,7 @@ while True:
         for index, todo_item in enumerate(new_todos):
             print(f"{index+1}-{todo_item.capitalize()}")
 
-    elif 'edit' in user_action:
+    elif user_action.startswith('edit'):
         with open("files/todos.txt", 'r') as file:
            todos = file.readlines()
         number = int((user_action[4: ]).strip())
@@ -43,7 +42,7 @@ while True:
            todos.sort(key=str.lower)
         print(new_todo)
 
-    elif 'complete' in user_action:
+    elif user_action.startswith('complete'):
 
         with open("files/todos.txt", 'r') as file:
             todos = file.readlines()
@@ -58,7 +57,7 @@ while True:
             todos.sort(key=str.lower)
 
 
-    elif 'exit' in user_action:
+    elif user_action.startswith(exit):
         break
 
     else: #"whatever" in user_action:

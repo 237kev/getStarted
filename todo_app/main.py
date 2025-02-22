@@ -1,4 +1,27 @@
+TODO_FILES_PAHT = "Files/todos.txt"
 
+def get_todos(path: str):
+    try:
+        with open(TODO_FILES_PAHT, 'r') as file:
+            todos = file.readlines()
+        return todos
+    except FileNotFoundError:
+        print("Error: The file 'files/todos.txt' does not exist.")
+        todos = []  # Initialize an empty list if the file doesn't exist
+
+def set_todos(path: str, todos: []):
+    try:
+        with open(TODO_FILES_PAHT, 'w') as file:
+            todos.sort(key=str.lower)
+            file.writelines(todos)
+    except FileNotFoundError:
+        print("Error: The file 'files/todos.txt' does not exist.")
+    except PermissionError:
+        print("Error: Insufficient permissions to write to the file.")
+    except IsADirectoryError:
+        print("Error: 'files/todos.txt' is a directory, not a file.")
+    except IOError as io_err:
+        print(f"IO error occurred: {io_err}")
 
 while True:
     try:
@@ -10,12 +33,12 @@ while True:
             try:
                 todos = []
                 todo = (user_action[3:]).strip()
-                try:
-                    with open("Files/todos.txt", 'r') as file:
-                        todos = file.readlines()
-                except FileNotFoundError:
-                    todos = []  # Initialize an empty list if the file doesn't exist
-
+#                try:
+#                    with open("Files/todos.txt", 'r') as file:
+#                        todos = file.readlines()
+#               except FileNotFoundError:
+#                    todos = []  # Initialize an empty list if the file doesn't exist
+                todos = get_todos(TODO_FILES_PAHT)
                 todos.append(todo.capitalize() + '\n')      # the new todoo item is appended to list read from the file todos
                 todos.sort(key=str.lower)
 
@@ -35,11 +58,12 @@ while True:
                 print("Error: 'user_action' is not defined.")
             except Exception as e:
                 print(f"An unexpected error occurred: {e}")
-
+            set_todos(TODO_FILES_PAHT, todos)
 
         elif user_action.startswith('show'):
-            with open("Files/todos.txt",'r') as file:
-                todos = file.readlines()
+#            with open("Files/todos.txt",'r') as file:
+#                todos = file.readlines()
+            todos = get_todos(TODO_FILES_PAHT)
             new_todos = []
             new_todos = [todo_item.strip('\n') for todo_item in todos] # list comprehension to contract the for lop in one line
 
@@ -48,13 +72,8 @@ while True:
 
         elif user_action.startswith('edit'):
 
-            try:
-                with open("files/todos.txt", 'r') as file:
-                   todos = file.readlines()
-            except FileNotFoundError:
-                print("Error: The file 'files/todos.txt' does not exist.")
-                todos = []  # Initialize an empty list if the file doesn't exist
 
+            todos = get_todos(TODO_FILES_PAHT)
             try:
                 number = int((user_action[4: ]).strip())
                 if number < 1 or number > len(todos):
@@ -71,24 +90,25 @@ while True:
 
             new_todo = input("Enter a new todo: ")
             todos[number - 1] = new_todo + '\n'
-            try:
-                with open("files/todos.txt", 'w') as file:
-                   file.writelines(todos)
-                   todos.sort(key=str.lower)
-                print(new_todo)
-            except PermissionError:
-                print("Error: Insufficient permissions to write to the file.")
-            except IsADirectoryError:
-                print("Error: 'files/todos.txt' is a directory, not a file.")
-            except IOError as io_err:
-                print(f"IO error occurred: {io_err}")
-
+#            try:
+#                with open("files/todos.txt", 'w') as file:
+#                   file.writelines(todos)
+#                   todos.sort(key=str.lower)
+#                print(new_todo)
+#            except PermissionError:
+#                print("Error: Insufficient permissions to write to the file.")
+#            except IsADirectoryError:
+#                print("Error: 'files/todos.txt' is a directory, not a file.")
+#            except IOError as io_err:
+#                print(f"IO error occurred: {io_err}")
+            set_todos(TODO_FILES_PAHT,todos)
 
 
         elif user_action.startswith('complete'):
 
-            with open("files/todos.txt", 'r') as file:
-                todos = file.readlines()
+#            with open("files/todos.txt", 'r') as file:
+#                todos = file.readlines()
+            todos = get_todos(TODO_FILES_PAHT)
             try:
                 number = int(user_action[8:].strip())
                 if number < 1 or number > len(todos):
@@ -115,7 +135,7 @@ while True:
                 print(f"IO error occurred: {io_err}")
 
 
-        elif user_action.startswith(exit):
+        elif user_action.startswith('exit'):
             break
 
         else: #"whatever" in user_action:

@@ -60,7 +60,7 @@ while True:
             new_todos = [todo_item.strip('\n') for todo_item in todos]  # list comprehension to contract the for lop in one line
 
             list_box.update(values=new_todos)
-
-
+        case sg.WINDOW_CLOSED:
+            break
 
 window.close()

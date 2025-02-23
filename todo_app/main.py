@@ -1,4 +1,5 @@
 import functions
+import time
 
 while True:
     try:

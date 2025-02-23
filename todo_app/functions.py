@@ -39,3 +39,6 @@ def set_todos(path: str, todos: []):
         print("Error: 'files/todos.txt' is a directory, not a file.")
     except IOError as io_err:
         print(f"IO error occurred: {io_err}")
+
+
+print("Hello from function")

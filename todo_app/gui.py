@@ -63,11 +63,20 @@ while True:
         case sg.WINDOW_CLOSED:
             break
         case 'complete':
-            print("complete case")
             todos = functions.get_todos(functions.TODO_FILES_PAHT)
             selected_item = values['-LIST-']
             todos.remove(selected_item[0]+'\n')
             functions.set_todos(functions.TODO_FILES_PAHT,todos)
             list_box.update(values=todos)
+        case'edit':
+            todos = functions.get_todos(functions.TODO_FILES_PAHT)
+            selected_item = values['-LIST-']
+            new_todo = values['entered todo item']
+            index_of_selected_item = todos.index(selected_item[0] + '\n')
+            todos[index_of_selected_item] = new_todo
+            todos.sort(key=str.lower)
+            list_box.update(values=todos)
+
+
 
 window.close()

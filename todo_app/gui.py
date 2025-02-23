@@ -5,7 +5,7 @@ label = sg.Text('Type in a to-do')
 
 input_box = sg.InputText(tooltip='Enter todo',key='entered todo item')
 todos= []
-list_box = sg.Listbox(values=todos,size=[40,20])
+list_box = sg.Listbox(values=todos,size=[40,20], key='-LIST-')
 
 add_button = sg.Button(button_text='Add',size=[3,1])
 edit_button = sg.Button('edit')
@@ -62,5 +62,12 @@ while True:
             list_box.update(values=new_todos)
         case sg.WINDOW_CLOSED:
             break
+        case 'complete':
+            print("complete case")
+            todos = functions.get_todos(functions.TODO_FILES_PAHT)
+            selected_item = values['-LIST-']
+            todos.remove(selected_item[0]+'\n')
+            functions.set_todos(functions.TODO_FILES_PAHT,todos)
+            list_box.update(values=todos)
 
 window.close()

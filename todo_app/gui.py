@@ -5,7 +5,7 @@ label = sg.Text('Type in a to-do')
 
 input_box = sg.InputText(tooltip='Enter todo',key='entered todo item')
 todos= []
-list_box = sg.Listbox(values=todos,size=[40,20], key='-LIST-')
+list_box = sg.Listbox(values=todos,size=[40,20], key='-LIST-',enable_events=True)
 
 add_button = sg.Button(button_text='Add',size=[3,1])
 edit_button = sg.Button('edit')
@@ -55,6 +55,7 @@ while True:
                 print(f"An unexpected error occurred: {e}")
             functions.set_todos(functions.TODO_FILES_PAHT, todos)
             list_box.update(values=todos)
+
         case 'show':
             todos = functions.get_todos(functions.TODO_FILES_PAHT)
             new_todos = []
@@ -72,6 +73,7 @@ while True:
             todos_with_newline = [todo + '\n' for todo in clean_todos]
             functions.set_todos(functions.TODO_FILES_PAHT,todos_with_newline)
             list_box.update(values=todos_with_newline)
+
         case'edit':
             todos = functions.get_todos(functions.TODO_FILES_PAHT)
             selected_item = values['-LIST-']
@@ -80,10 +82,11 @@ while True:
             clean_todos = [todo.strip() for todo in todos]
             index_of_selected_item = clean_todos.index((selected_item[0]).strip())
             clean_todos[index_of_selected_item] = new_todo
-#            todos.sort(key=str.lower)
+            clean_todos.sort(key=str.lower)
             list_box.update(values=clean_todos)
             todos_with_newline = [todo + '\n' for todo in clean_todos]
             functions.set_todos(functions.TODO_FILES_PAHT, todos_with_newline)
+
 
 
 

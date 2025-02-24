@@ -35,7 +35,7 @@ while True:
                 todo = values['entered todo item']
                 print(todo)
                 todos = functions.get_todos(functions.TODO_FILES_PAHT)
-                todos.append(todo.capitalize() + '\n')  # the new todoo item is appended to list read from the file todos
+                todos.append(todo + '\n')  # the new todoo item is appended to list read from the file todos
                 todos.sort(key=str.lower)
 
 
@@ -54,6 +54,7 @@ while True:
             except Exception as e:
                 print(f"An unexpected error occurred: {e}")
             functions.set_todos(functions.TODO_FILES_PAHT, todos)
+            list_box.update(values=todos)
         case 'show':
             todos = functions.get_todos(functions.TODO_FILES_PAHT)
             new_todos = []
@@ -64,18 +65,25 @@ while True:
             break
         case 'complete':
             todos = functions.get_todos(functions.TODO_FILES_PAHT)
+            clean_todos = [todo.strip() for todo in todos]
             selected_item = values['-LIST-']
-            todos.remove(selected_item[0]+'\n')
-            functions.set_todos(functions.TODO_FILES_PAHT,todos)
-            list_box.update(values=todos)
+            print(f"selected_item: {selected_item}")
+            clean_todos.remove((selected_item[0]).strip())
+            todos_with_newline = [todo + '\n' for todo in clean_todos]
+            functions.set_todos(functions.TODO_FILES_PAHT,todos_with_newline)
+            list_box.update(values=todos_with_newline)
         case'edit':
             todos = functions.get_todos(functions.TODO_FILES_PAHT)
             selected_item = values['-LIST-']
+            print(f"selected item: {selected_item}")
             new_todo = values['entered todo item']
-            index_of_selected_item = todos.index(selected_item[0] + '\n')
-            todos[index_of_selected_item] = new_todo
-            todos.sort(key=str.lower)
-            list_box.update(values=todos)
+            clean_todos = [todo.strip() for todo in todos]
+            index_of_selected_item = clean_todos.index((selected_item[0]).strip())
+            clean_todos[index_of_selected_item] = new_todo
+#            todos.sort(key=str.lower)
+            list_box.update(values=clean_todos)
+            todos_with_newline = [todo + '\n' for todo in clean_todos]
+            functions.set_todos(functions.TODO_FILES_PAHT, todos_with_newline)
 
 
 

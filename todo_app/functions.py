@@ -1,4 +1,4 @@
-TODO_FILES_PAHT = "Files/todos.txt"
+TODO_FILES_PATH = "Files/todos.txt"
 
 def get_todos(path: str) -> list[str] :
     """
@@ -10,7 +10,7 @@ def get_todos(path: str) -> list[str] :
     :return: A list of to-do items (each as a string).
     """
     try:
-        with open(TODO_FILES_PAHT, 'r') as file:
+        with open(TODO_FILES_PATH, 'r') as file:
             todos = file.readlines()
         return todos
     except FileNotFoundError:
@@ -28,7 +28,7 @@ def set_todos(path: str, todos: []):
     :return: None
     """
     try:
-        with open(TODO_FILES_PAHT, 'w') as file:
+        with open(TODO_FILES_PATH, 'w') as file:
             todos.sort(key=str.lower)
             file.writelines(todos)
     except FileNotFoundError:

@@ -77,6 +77,7 @@ while True:
         case'edit':
             todos = functions.get_todos(functions.TODO_FILES_PAHT)
             selected_item = values['-LIST-']
+
             print(f"selected item: {selected_item}")
             new_todo = values['entered todo item']
             clean_todos = [todo.strip() for todo in todos]
@@ -86,6 +87,10 @@ while True:
             list_box.update(values=clean_todos)
             todos_with_newline = [todo + '\n' for todo in clean_todos]
             functions.set_todos(functions.TODO_FILES_PAHT, todos_with_newline)
+
+        case'-LIST-':
+            selected_item = values['-LIST-']
+            window['entered todo item'].update(selected_item[0])
 
 
 

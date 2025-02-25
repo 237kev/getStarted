@@ -7,7 +7,7 @@ import os
 #TODO_FILES_PATH = "C:\\Projekte\\Python\\getStarted\\todo_app\\todos.txt"
 
 
-TODO_FILES_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "todo.txt")
+TODO_FILES_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "todos.txt")
 
 
 

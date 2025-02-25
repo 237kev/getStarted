@@ -1,1 +1,8 @@
 ﻿todo_app/Files/todos.txt
+todo_app/__pycache__
+todo_app/dist
+*.txt
+*.spec
+*.iss
+*.exe
+todo_app/build

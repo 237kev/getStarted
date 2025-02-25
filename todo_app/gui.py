@@ -1,6 +1,9 @@
 import functions
 import FreeSimpleGUI as sg
 
+print(f"Executable Path: {functions.TODO_FILES_PATH}")
+
+
 label = sg.Text('Type in a to-do')
 
 input_box = sg.InputText(tooltip='Enter todo',key='entered todo item')
@@ -34,7 +37,7 @@ while True:
             try:
                 todo = values['entered todo item']
                 print(todo)
-                todos = functions.get_todos(functions.TODO_FILES_PAHT)
+                todos = functions.get_todos(functions.TODO_FILES_PATH)
                 todos.append(todo + '\n')  # the new todoo item is appended to list read from the file todos
                 todos.sort(key=str.lower)
 

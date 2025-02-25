@@ -1,4 +1,15 @@
-TODO_FILES_PATH = "Files/todos.txt"
+import sys
+import os
+
+# Get the directory where the EXE is located
+
+#TODO_FILES_PATH = "Files/todos.txt"
+#TODO_FILES_PATH = "C:\\Projekte\\Python\\getStarted\\todo_app\\todos.txt"
+
+
+TODO_FILES_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "todo.txt")
+
+
 
 def get_todos(path: str) -> list[str] :
     """
@@ -10,12 +21,15 @@ def get_todos(path: str) -> list[str] :
     :return: A list of to-do items (each as a string).
     """
     try:
+        if not os.path.exists(TODO_FILES_PATH):
+            with open(TODO_FILES_PATH, "w") as file:
+                file.write("")  # Write an empty string (optional)
         with open(TODO_FILES_PATH, 'r') as file:
             todos = file.readlines()
-        return todos
+            return todos
     except FileNotFoundError:
-        print("Error: The file 'files/todos.txt' does not exist.")
-        todos = []  # Initialize an empty list if the file doesn't exist
+            print("Error: The file 'files/todos.txt' does not exist.")
+            todos = []  # Initialize an empty list if the file doesn't exist
 
 def set_todos(path: str, todos: []):
     """

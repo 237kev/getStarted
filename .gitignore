@@ -6,3 +6,5 @@ todo_app/dist
 *.iss
 *.exe
 todo_app/build
+todo_app/todo_icon.ico
+todo_app/todo_icon.webp

@@ -3,10 +3,11 @@ import FreeSimpleGUI as sg
 
 print(f"Executable Path: {functions.TODO_FILES_PATH}")
 
+sg.theme('Black')
 
 label = sg.Text('Type in a to-do')
 
-input_box = sg.InputText(tooltip='Enter todo',key='entered todo item')
+input_box = sg.InputText(tooltip='Enter todo',key='entered todo item', background_color='Grey')
 todos= []
 list_box = sg.Listbox(values=todos,size=[40,20], key='-LIST-',enable_events=True)
 
@@ -26,6 +27,7 @@ window = sg.Window(title="My To-Do App",
                                 [exit_button]
                             ],
                    font=('Tahoma',10))
+
 while True:
 
     event,values = window.read()
@@ -80,19 +82,25 @@ while True:
             input_box.update('')
 
         case'edit':
-            todos = functions.get_todos(functions.TODO_FILES_PATH)
-            selected_item = values['-LIST-']
-
-            print(f"selected item: {selected_item}")
-            new_todo = values['entered todo item']
-            clean_todos = [todo.strip('\n') for todo in todos]
             try:
+                todos = functions.get_todos(functions.TODO_FILES_PATH)
+                selected_item = values['-LIST-']
+
+                print(f"selected item: {selected_item}")
+                new_todo = values['entered todo item']
+                clean_todos = [todo.strip('\n') for todo in todos]
                 index_of_selected_item = clean_todos.index((selected_item[0]).strip())
+                clean_todos[index_of_selected_item] = new_todo
+                clean_todos.sort(key=str.lower)
+                list_box.update(values=clean_todos)
             except ValueError:
                 print("Error: Selected item not found in the list.")
-            clean_todos[index_of_selected_item] = new_todo
-            clean_todos.sort(key=str.lower)
-            list_box.update(values=clean_todos)
+                sg.popup("Error: Selected item not found in the list.")
+            except IndexError:
+                sg.popup("Error: select a todo first")
+            except NameError:
+                sg.popup("Error: select a todo first")
+
 
 
 

@@ -10,7 +10,7 @@ input_box = sg.InputText(tooltip='Enter todo',key='entered todo item')
 todos= []
 list_box = sg.Listbox(values=todos,size=[40,20], key='-LIST-',enable_events=True)
 
-add_button = sg.Button(button_text='Add',size=[3,1])
+add_button = sg.Button(button_text='Add',size=[3,1],bind_return_key=True)
 edit_button = sg.Button('edit')
 complete_button = sg.Button('complete')
 exit_button = sg.Button('exit')
@@ -38,7 +38,8 @@ while True:
                 todo = values['entered todo item']
                 print(todo)
                 todos = functions.get_todos(functions.TODO_FILES_PATH)
-                todos.append(todo + '\n')  # the new todoo item is appended to list read from the file todos
+                if todo not in todos:
+                    todos.append(todo + '\n')  # the new todoo item is appended to list read from the file todos
                 todos.sort(key=str.lower)
 
 
@@ -84,8 +85,11 @@ while True:
 
             print(f"selected item: {selected_item}")
             new_todo = values['entered todo item']
-            clean_todos = [todo.strip() for todo in todos]
-            index_of_selected_item = clean_todos.index((selected_item[0]).strip())
+            clean_todos = [todo.strip('\n') for todo in todos]
+            try:
+                index_of_selected_item = clean_todos.index((selected_item[0]).strip())
+            except ValueError:
+                print("Error: Selected item not found in the list.")
             clean_todos[index_of_selected_item] = new_todo
             clean_todos.sort(key=str.lower)
             list_box.update(values=clean_todos)

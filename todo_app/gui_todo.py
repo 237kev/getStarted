@@ -76,6 +76,7 @@ while True:
             todos_with_newline = [todo + '\n' for todo in clean_todos]
             functions.set_todos(functions.TODO_FILES_PATH,todos_with_newline)
             list_box.update(values=todos_with_newline)
+            input_box.update('')
 
         case'edit':
             todos = functions.get_todos(functions.TODO_FILES_PATH)
@@ -88,6 +89,9 @@ while True:
             clean_todos[index_of_selected_item] = new_todo
             clean_todos.sort(key=str.lower)
             list_box.update(values=clean_todos)
+
+
+
             todos_with_newline = [todo + '\n' for todo in clean_todos]
             functions.set_todos(functions.TODO_FILES_PATH, todos_with_newline)
 
